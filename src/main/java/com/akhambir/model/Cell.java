@@ -1,16 +1,31 @@
 package com.akhambir.model;
 
+import static com.akhambir.util.Validator.isEvenRowAndEvenColumn;
+import static com.akhambir.util.Validator.isOddRowAndOddColumn;
+
 public class Cell {
     private Figure figure;
-    private char cellChar;
-    private int cellNumber;
+    private int row;
+    private char column;
 
-    public boolean isBlack() {
-        return false; // TODO implement algorithm for color definition
+    public boolean isWhite(Cell cell) { // TODO I think it's can be implemented much stylishly (easier)
+        if (isOddRowAndOddColumn(cell)) {
+            return false;
+        }
+        if (isEvenRowAndEvenColumn(cell)) {
+            return false;
+        }
+        return true;
     }
 
-    public boolean isWhite() {
-        return false; // TODO same for white
+    public boolean isBlack(Cell cell) {
+        if (isOddRowAndOddColumn(cell)) {
+            return true;
+        }
+        if (isEvenRowAndEvenColumn(cell)) {
+            return true;
+        }
+        return false;
     }
 
     public Figure getFigure() {
@@ -19,5 +34,21 @@ public class Cell {
 
     public void setFigure(Figure figure) {
         this.figure = figure;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public char getColumn() {
+        return column;
+    }
+
+    public void setColumn(char column) {
+        this.column = column;
     }
 }

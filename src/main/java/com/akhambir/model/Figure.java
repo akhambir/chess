@@ -1,27 +1,28 @@
 package com.akhambir.model;
 
+import static com.akhambir.util.Validator.checkFigureValue;
 import static com.akhambir.model.Figure.FigureType.*;
 
 public class Figure {
     private byte value;
 
     public Figure(byte value) {
-        if (value < 1 || value > 13) {
-            throw new RuntimeException("Wrong figure value. Passed value: " + value);
-        }
+        checkFigureValue(value);
         this.value = value;
     }
 
-    public boolean isWhite() {
-        return false; //TODO
+    public boolean isWhite(byte value) {
+        checkFigureValue(value);
+        return value > 1 && value < 7; // TODO refactor magic numbers
     }
 
-    public boolean isBlack() {
-        return false;
+    public boolean isBlack(byte value) {
+        checkFigureValue(value);
+        return value > 6 && value < 14; //TODO refactor magic numbers
     }
 
     public FigureType getType() {
-        return FIGURES[(value - 1) % 6];
+        return FIGURES[(value - 1) % 6]; //TODO refactor magic numbers
     }
 
     public static Figure of(byte figureValue) {
