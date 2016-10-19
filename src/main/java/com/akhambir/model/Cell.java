@@ -8,47 +8,32 @@ public class Cell {
     private int row;
     private char column;
 
+    public Cell(int row, char column) {
+        this.row = row;
+        this.column = column;
+    }
+
     public boolean isWhite(Cell cell) { // TODO I think it's can be implemented much stylishly (easier)
-        if (isOddRowAndOddColumn(cell)) {
-            return false;
-        }
-        if (isEvenRowAndEvenColumn(cell)) {
-            return false;
-        }
-        return true;
+        return !isOddRowAndOddColumn(cell) && !isEvenRowAndEvenColumn(cell);
     }
 
     public boolean isBlack(Cell cell) {
-        if (isOddRowAndOddColumn(cell)) {
-            return true;
-        }
-        if (isEvenRowAndEvenColumn(cell)) {
-            return true;
-        }
-        return false;
+        return isOddRowAndOddColumn(cell) || isEvenRowAndEvenColumn(cell);
     }
 
     public Figure getFigure() {
         return figure;
     }
 
-    public void setFigure(Figure figure) {
-        this.figure = figure;
-    }
-
     public int getRow() {
         return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
     }
 
     public char getColumn() {
         return column;
     }
 
-    public void setColumn(char column) {
-        this.column = column;
+    public static Cell of(int row, char column) {
+        return new Cell(row, column);
     }
 }

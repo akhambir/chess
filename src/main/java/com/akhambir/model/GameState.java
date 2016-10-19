@@ -28,11 +28,24 @@ public class GameState {
         return Optional.of(Figure.of(figureValue)); //TODO
     }
 
-    private int getIndex(int row, char columnChar) {
+    private static int getIndex(int row, char columnChar) {
         int column = columnChar - 'a';
         checkRowAndColumnState(row, column);
         row--;
         column--;
         return row * 8 + column;
+    }
+
+    private static int getIndex(Cell cell) {
+        return getIndex(cell.getRow(), cell.getColumn());
+    }
+
+
+    public static GameState of(GameState oldState, Move move) {
+        GameState newState = new GameState(oldState.state);
+        byte figure =  newState.state[getIndex(move.getCellFrom())];
+        newState.state[getIndex(move.getCellFrom())] = 0;
+        newState.state[getIndex(move.getCellTo())] = figure;
+        return new GameState(oldState.state);
     }
 }
